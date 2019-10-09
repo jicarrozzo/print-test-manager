@@ -1,5 +1,7 @@
 {
   "name": "printer-manager",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

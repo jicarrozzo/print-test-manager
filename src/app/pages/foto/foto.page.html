@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Imprimir Fotos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-card #start *ngIf="!printer">
+    <ion-card-header>
+      <ion-card-subtitle>
+          Para comenzar seleccione una impresora
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content text-center>
+      <ion-button (click)="getList()">
+        <ion-icon slot="start" name="print"></ion-icon>
+        Seleccionar
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card #printerData *ngIf="printer">
+    <ion-card-header>
+      <ion-item lines="none">
+        <ion-icon name="print" slot="start"></ion-icon>
+        <ion-label>
+          {{ printer?.name}}
+        </ion-label>
+        <ion-icon slot="end" name="power" (click)="disconnect()"></ion-icon>
+      </ion-item>
+    </ion-card-header>
+  </ion-card>
+   
+  <h3 *ngIf="imageHandler.images.length == 0" text-center>Seleccione una imagen!</h3>
+ 
+  <ion-list>
+    <ion-item *ngFor="let img of imageHandler.images; index as pos" text-wrap (click)="more(img, pos)" >
+      <ion-thumbnail slot="start">
+        <ion-img [src]="img.path"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        {{ img.name }}
+      </ion-label>
+      <ion-icon slot="end" name="more"></ion-icon>
+    </ion-item>
+    <!-- <ion-img [src]="img.path"></ion-img> -->
+  </ion-list>
+
+  
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-button fill="clear" expand="full" color="light" (click)="selectImage()">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      Agregar Imagen</ion-button>
+  </ion-toolbar>
+</ion-footer>

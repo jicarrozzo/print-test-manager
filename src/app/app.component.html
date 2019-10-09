@@ -1,3 +1,54 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane contentId="main" when="md">
+    <ion-menu side="start" menuId="first" contentId="main">
+      <ion-content>
+        <ion-list no-padding>
+          <ion-item color="primary">
+            <ion-icon slot="start" name="print"></ion-icon>
+            <ion-label>
+              <h2>Agilis Printer Tester</h2>
+            </ion-label>
+          </ion-item>
+ 
+          <ion-menu-toggle autoHide="false"> 
+            <ion-item routerLink="/home">
+              <ion-icon slot="start" name="list" color="secondary"></ion-icon>
+              <ion-label class="menu-item">Texto/Imagen/QR/Barcode</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle autoHide="false">
+            <ion-item routerLink="/foto">
+              <ion-icon slot="start" name="camera" color="secondary"></ion-icon>
+              <ion-label class="menu-item">Capturas</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <!-- <ion-menu-toggle autoHide="false">
+            <ion-item routerLink="/form-test" [disabled]="true">
+              <ion-icon slot="start" name="filing" color="secondary"></ion-icon>
+              <ion-label class="menu-item">Formularios</ion-label>
+            </ion-item>
+          </ion-menu-toggle> -->
+          <!-- <ion-menu-toggle autoHide="false">
+            <ion-item routerLink="/settings" [disabled]="true">
+              <ion-icon slot="start" name="settings" color="secondary"></ion-icon>
+              <ion-label class="menu-item">Configuración</ion-label>
+            </ion-item>
+          </ion-menu-toggle> -->
+      
+        </ion-list>
+        
+        <ion-menu-toggle autoHide="false">
+          <ion-button expand="full" (click)="closeApp()" >Salir</ion-button>
+        </ion-menu-toggle>
+        
+        <ion-item lines="none" class="position-bottom">
+          <ion-label>
+            <h2>2019 - SISORG S.R.L</h2>
+          </ion-label>
+        </ion-item>
+      </ion-content>
+    </ion-menu>
+    
+    <ion-router-outlet id="main"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>

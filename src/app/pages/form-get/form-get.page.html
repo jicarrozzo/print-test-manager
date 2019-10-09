@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-toolbar color="secondary">
+      <ion-title>Formularios</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="dismiss()">
+          <ion-icon slot="start" name="close-circle-outline"></ion-icon>
+          Cerrar
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding>
+  <ion-card text-center>
+    <ion-item>
+      <ion-label>Producto</ion-label>
+      <ion-select placeholder="Seleccionar" [(ngModel)]="producto">
+        <ion-select-option value="GetFrixoAll">Agilis.Frixo</ion-select-option>
+        <ion-select-option value="GetHefestoAll">Agilis.Hefesto</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input type="text" [(ngModel)]="clave" placeholder="Clave de Modulo Rest"></ion-input>
+    </ion-item>
+    <ion-button (click)="searchLicencia()">
+      <ion-icon slot="start" name="search"></ion-icon>
+      Buscar
+    </ion-button>
+  </ion-card>
+
+  <ion-card *ngIf="licencia">
+    <ion-card-header>
+      <ion-card-subtitle>
+        <p><span>Cliente</span>: <span>{{ licencia.Cliente.NombreCompleto }}</span></p>
+        <p><span>Producto</span>: <span>{{ licencia.Producto.Nombre }}</span></p>
+        <p><span>Módulo</span>: <span>{{ licencia.ProductoModulo.Nombre }}</span></p>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>Formularios</ion-label>
+      <ion-list>
+        <ion-item detail="true" *ngFor="let form of formularios$ | async" (click)="select(form)">
+          <ion-label>{{ form.Nombre }} ({{ form.Version}})</ion-label>
+        </ion-item>
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
+

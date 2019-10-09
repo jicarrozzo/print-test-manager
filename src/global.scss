@@ -9,3 +9,26 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+:root {
+	--ion-background-color: #eeeeee; //var(--ion-color-light);
+}
+ion-card {
+	border-radius: 8px !important;
+	--background: var(--ion-color-primary-contrast) !important;
+}
+ion-item {
+	--background: transparent !important;
+}
+.position-bottom {
+	position: absolute;
+	left: 0;
+	bottom: 40px;
+	right: 0;
+	//--background: var(--ion-color-medium) !important;
+	max-height: 30px;
+	font-size: 12px;
+}
+.searchbox {
+	border: 1px solid var(--ion-color-primary) !important;
+}

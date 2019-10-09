@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Impresoras</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="start" name="close-circle-outline"></ion-icon>
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-item lines="none" *ngFor="let printer of printers$ | async" (click)="select(printer)">
+  <ion-label>
+    <h2>{{ printer.name }}</h2>
+    <p>{{ printer.address }}</p>
+  </ion-label>
+</ion-item>
+</ion-content>
