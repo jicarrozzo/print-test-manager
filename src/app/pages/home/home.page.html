@@ -10,11 +10,11 @@
 </ion-header>
 
 <ion-content>
-  
+
   <ion-card #start *ngIf="!printer">
     <ion-card-header>
       <ion-card-subtitle>
-          Para comenzar seleccione una impresora
+        Para comenzar seleccione una impresora
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content text-center>
@@ -40,6 +40,10 @@
         <ion-label position="floating">Texto de prueba</ion-label>
         <ion-input type="text" [(ngModel)]="textToPrint"></ion-input>
       </ion-item>
+      <ion-item lines="none">
+        <ion-label>Probar Zebra CMD</ion-label>
+        <ion-toggle slot="end" [(ngModel)]="isZebra"></ion-toggle>
+      </ion-item>
       <br>
       <ion-button fill="outline" expand="full" (click)="test('text')" [disabled]="!printer">
         Imprimir Texto
@@ -54,8 +58,8 @@
         Imprimir Imagen
       </ion-button>
       <br><br>
-      
-      <ion-button *ngIf="!formToPrint" (click)="getFormulario()" fill="outline" expand="full" >
+
+      <ion-button *ngIf="!formToPrint" (click)="getFormulario()" fill="outline" expand="full">
         Imprimir Formulario
       </ion-button>
       <ion-grid fixed *ngIf="formToPrint" class="likebutton">
@@ -75,7 +79,7 @@
             </ion-button>
           </ion-col>
           <ion-col size="12">
-            <ion-button (click)="testTicketList(true)"  expand="full">
+            <ion-button (click)="testTicketList(true)" expand="full">
               Imprimir con QR
             </ion-button>
           </ion-col>

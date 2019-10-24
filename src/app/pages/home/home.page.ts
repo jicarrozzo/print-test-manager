@@ -6,6 +6,7 @@ import { AgilisPrinterBLTService } from 'src/app/services/printer-blt.service';
 import { UiNotificationHelper } from 'src/app/services/uinotification.helper';
 import { FormGetPage } from '../form-get/form-get.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { PRINTABLE_TEXT, PRINTABLE_IMAGE } from 'src/app/models/ae-resources';
 
 @Component({
 	selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomePage implements OnInit {
 	textToPrint: string = '1234567890';
 	qrToPrint: any;
 	formToPrint: PrinterServer.Form;
+	isZebra: boolean = false;
 
 	constructor(
 		private modalCtrl: ModalController,
@@ -130,9 +132,16 @@ export class HomePage implements OnInit {
 	}
 	async testText() {
 		try {
-			const toPrint: string = `${PrinterServer.Commands.HARDWARE.HW_INIT}{b}${this.textToPrint}{/b}{br}
-			{h}${this.textToPrint}{/h}{br}${this.textToPrint}{br}{center}{w}${this.textToPrint}{/w}{br}{br}`;
-			await this.printerService.printText(toPrint);
+			const toPrint: string = (this.isZebra ? PRINTABLE_TEXT.zebra : PRINTABLE_TEXT.generic).replace(
+				/%%TEXT-TO-PRINT/g,
+				this.textToPrint
+			);
+
+			// `${PrinterServer.Commands.HARDWARE.HW_INIT}{b}${this.textToPrint}{/b}{br}
+			// {h}${this.textToPrint}{/h}{br}${this.textToPrint}{br}{center}{w}${this.textToPrint}{/w}{br}{br}`;
+			if (this.isZebra) {
+				await this.printerService.write(toPrint);
+			} else await this.printerService.printText(toPrint);
 			this.uihelper.toastCustom('Impresión OK');
 		} catch (error) {
 			this.uihelper.alertBasic('Error de impresión', error);
@@ -163,20 +172,27 @@ export class HomePage implements OnInit {
 			this.uihelper.alertBasic('Error de impresión', error);
 		}
 	}
-	testImage() {
-		const image = new Image();
-		image.onload = () => {
-			let canvas = document.createElement('canvas');
-			canvas.height = 200;
-			canvas.width = 200;
-			var context = canvas.getContext('2d');
-			context.drawImage(image, 0, 0);
+	async testImage() {
+		if (this.isZebra) {
+			await this.printerService.printImage(PRINTABLE_IMAGE.zebra, 300, 300, 1);
+			await this.printerService.printCutLine();
+		} else {
+			const image = new Image();
+			image.onload = () => {
+				let canvas = document.createElement('canvas');
+				canvas.height = 200;
+				canvas.width = 200;
+				var context = canvas.getContext('2d');
+				context.drawImage(image, 0, 0);
 
-			var imageData = canvas.toDataURL('image/jpeg').replace(/^data:image\/(png|jpg|jpeg);base64,/, ''); //remove mimetype
-			this.printerService.printImage(imageData, canvas.width, canvas.height, 1);
-			this.printerService.printCutLine();
-		};
-		image.src = 'assets/lenin.jpg';
+				var imageData = canvas.toDataURL('image/jpeg').replace(/^data:image\/(png|jpg|jpeg);base64,/, ''); //remove mimetype
+				console.log(imageData);
+
+				this.printerService.printImage(imageData, canvas.width, canvas.height, 1);
+				this.printerService.printCutLine();
+			};
+			image.src = 'assets/lenin.jpg';
+		}
 	}
 	async testTicketList(withQR: boolean) {
 		console.log(this.processForm());
