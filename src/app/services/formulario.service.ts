@@ -15,7 +15,8 @@ export class FormularioService {
 	 * @param p 
 	 */
 	get(url: string, metodo: string) {
-		return this.connectionHandler.post<PrinterServer.Form[]>(url, 'Formulario', metodo, '{}').pipe(
+		//return this.connectionHandler.post<PrinterServer.Form[]>(url, 'Formulario', metodo, '{}').pipe(
+		return this.connectionHandler.post<PrinterServer.Form[]>({ url, controller: 'Formulario' }, metodo, '{}').pipe(
 			map((x) => {
 				x = x.map((y) => {
 					if (y['type'] != null) {

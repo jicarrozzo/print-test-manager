@@ -21,6 +21,7 @@ export namespace Agilis {
 		FICS_REST = 67,
 		AMS_REST = 74,
 		PXP_REST = 68,
+		ATS_REST = 80,
 		MOBILE_LAYER = 59,
 		HERMES = 71,
 		FRIXO = 72,
@@ -35,11 +36,24 @@ export namespace Agilis {
 		MODIFICACION = 2
 	}
 
+	/** Roles segun producto */
+	export enum Roles {
+		/** Rol que permite acceder a empresas de FICS */
+		FICS_TRAFICO_ADMINISTRAR_EMPRESA = 44
+	}
 	/**
    * Clase q se utiliza para enviar datos a FICS.Rest
    */
 	export class WebClientParams {
 		constructor(public method: string, public jsonparams: string) {}
+	}
+
+	/**
+	 * Clase para componer url de llamadas post/get
+	 */
+	export interface UrlCompose {
+		url: string;
+		controller: string;
 	}
 
 	/**
@@ -55,6 +69,7 @@ export namespace Agilis {
 		EntityDetail?: any;
 		constructor() {}
 	}
+
 	export interface Licencia {
 		LicenciaID: number;
 		Producto: Producto;
