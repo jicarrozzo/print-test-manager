@@ -8,8 +8,12 @@ Allowed you to print:
 3. QR Codes
 4. Images
 5. Agilis Forms
+6. YouTube API
 
 It implements **cordova-plugin-datecs-printer**
 (https://github.com/giorgiofellipe/cordova-plugin-datecs-printer)
+
+
+Note: For the youtubeAPI to work, replace YouTubeAPIKey in the enviroment file with your own
   
 

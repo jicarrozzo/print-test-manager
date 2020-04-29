@@ -11,6 +11,61 @@
 
 <ion-content>
 
+  <ion-grid fixed>
+    <ion-segment [(ngModel)]="filter">
+      <ion-segment-button value="search">
+        <ion-label>Search</ion-label>
+      </ion-segment-button>
+      <!-- <ion-segment-button value="playlist">
+        <ion-label>Playlist</ion-label>
+      </ion-segment-button> -->
+      <ion-segment-button value="playlistItems">
+        <ion-label>playlistItems</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ng-container *ngIf="filter === 'search'">
+      <ion-item>
+        <ion-label>Canal de Youtube</ion-label>
+        <ion-select [(ngModel)]="itemId" placeholder="Select Channel" required interface="popover">
+          <ion-select-option value="UClZ4CLO6ZFYaSTH5982p4lQ">Yo</ion-select-option>
+          <ion-select-option value="UCgrZf4GSkXSC2bVVeOBqlsQ">Sisorg</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Channel Id <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required placeholder="Channel Id" [(ngModel)]="itemId"></ion-input>
+      </ion-item>
+    </ng-container>
+
+    <ng-container *ngIf="filter === 'playlistItems'">
+      <ion-item>
+        <ion-label>Playlist de Youtube</ion-label>
+        <ion-select [(ngModel)]="itemId" placeholder="Select Channel" required interface="popover">
+          <ion-select-option value="PLUj0FnFCDASLSm8yl07oYos0N9WxYDF_n">Angular Js</ion-select-option>
+          <ion-select-option value="PLQUA6WTxE9VzwcpKQW6ezVwjEFlJZ8mUW">Sisorg</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Playlist Id<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required placeholder="Playlist Id" [(ngModel)]="itemId"></ion-input>
+      </ion-item>
+    </ng-container>
+
+
+
+    <!-- <ion-row>
+      <ion-col size="4">
+        <ion-label>Channel Id</ion-label>
+      </ion-col>
+      <ion-col size="8">
+        <ion-input type="text" placeholder="Channel Id" [(ngModel)]="channelID"></ion-input>
+      </ion-col>
+    </ion-row> -->
+  </ion-grid>
+
   <ion-button (click)="get()" expand="block" fill="clear" shape="round">
     Get List
   </ion-button>
