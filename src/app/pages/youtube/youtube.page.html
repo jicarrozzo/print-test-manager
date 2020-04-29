@@ -26,9 +26,9 @@
 
     <ng-container *ngIf="filter === 'search'">
       <ion-item>
-        <ion-label>Canal de Youtube</ion-label>
+        <ion-label>Youtube Channels</ion-label>
         <ion-select [(ngModel)]="itemId" placeholder="Select Channel" required interface="popover">
-          <ion-select-option value="UClZ4CLO6ZFYaSTH5982p4lQ">Yo</ion-select-option>
+          <ion-select-option value="UClZ4CLO6ZFYaSTH5982p4lQ">My own</ion-select-option>
           <ion-select-option value="UCgrZf4GSkXSC2bVVeOBqlsQ">Sisorg</ion-select-option>
         </ion-select>
       </ion-item>
@@ -41,7 +41,7 @@
 
     <ng-container *ngIf="filter === 'playlistItems'">
       <ion-item>
-        <ion-label>Playlist de Youtube</ion-label>
+        <ion-label>Playlists</ion-label>
         <ion-select [(ngModel)]="itemId" placeholder="Select Channel" required interface="popover">
           <ion-select-option value="PLUj0FnFCDASLSm8yl07oYos0N9WxYDF_n">Angular Js</ion-select-option>
           <ion-select-option value="PLQUA6WTxE9VzwcpKQW6ezVwjEFlJZ8mUW">Sisorg</ion-select-option>
