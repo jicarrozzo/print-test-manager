@@ -12,8 +12,8 @@ const TestToken = environment.Token;
  * Header para los msgs Http
  */
 const headers = new HttpHeaders({
-	Accept: 'application/json',
-	'Content-Type': 'application/json',
+	Accept: 'application/json;charset=utf-8',
+	'Content-Type': 'application/json;charset=utf-8',
 	'Access-Control-Allow-Origin': '*',
 	'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
 });

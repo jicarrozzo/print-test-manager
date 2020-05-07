@@ -1,0 +1,156 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Help Desk Videos API
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="showsearch=true;showadd=false;">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button (click)="showsearch=false;showadd=true;">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ng-container *ngIf="showsearch">
+    <ion-item>
+      <ion-label>Producto Id</ion-label>
+      <ion-select [(ngModel)]="productoId" placeholder="Select producto" required interface="popover">
+        <ion-select-option value="1">Agilis.FICS</ion-select-option>
+        <ion-select-option value="2">Agilis.PXP</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Pagina</ion-label>
+      <ion-input type="text" [(ngModel)]="videoPagename"></ion-input>
+    </ion-item>
+    <ion-button (click)="search()" expand="block" fill="clear" shape="round">
+      Search
+    </ion-button>
+  </ng-container>
+
+  <ng-container *ngIf="showadd">
+    <ion-item>
+      <ion-label position="floating">Video Id</ion-label>
+      <ion-input type="text" [(ngModel)]="videoId"></ion-input>
+    </ion-item>
+    <ion-button (click)="searchVideo()" expand="block" fill="clear" shape="round">
+      Search video
+    </ion-button>
+  </ng-container>
+
+</ion-header>
+
+<ion-content>
+
+  <ng-container *ngIf="showadd && videoFound && videoToAdd">
+    <ion-card *ngFor="let item of videoToAdd.items">
+      <ion-card-header>
+        <ion-card-title>{{ item.snippet.title }}</ion-card-title>
+        <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col size="4">
+            <ion-img [src]="item.snippet.thumbnails.default.url" width="60px" height="45px"></ion-img>
+          </ion-col>
+          <ion-col size="8">
+
+            <ion-item>
+              <ion-label position="floating">Producto id</ion-label>
+              <ion-select [(ngModel)]="productoId" placeholder="Select producto" required interface="popover">
+                <ion-select-option value="1">Agilis.FICS</ion-select-option>
+                <ion-select-option value="2">Agilis.PXP</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-grid fixed>
+                <ion-row>
+                  <ion-col size="8">
+                    <ion-label position="floating">Add page</ion-label>
+                    <ion-input placeholder="Pagina" [(ngModel)]="videoPagename"></ion-input>
+                  </ion-col>
+                  <ion-col size="4">
+                    <ion-label position="floating">Priority</ion-label>
+                    <ion-select [(ngModel)]="videoPagePriority" interface="popover">
+                      <ion-select-option value="1">1</ion-select-option>
+                      <ion-select-option value="2">2</ion-select-option>
+                      <ion-select-option value="3">3</ion-select-option>
+                    </ion-select>
+                  </ion-col>
+                  <ion-col size="12">
+                    <ion-button (click)="addPage()">
+                      Add
+                      <ion-icon slot="end" name="add"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-chip color="primary" mode="ios" outline="true" (click)="removePage(page)"
+                      *ngFor="let page of videoRelations">
+                      <ion-label>{{ page.Name }} </ion-label>
+                      <ion-badge color="primary" mode="ios">{{ page.Priority }}</ion-badge>
+                    </ion-chip>
+
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+            </ion-item>
+
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label class="description" *ngIf="item.snippet.description === ''" color="danger"> El video no posee
+                descripcion
+              </ion-label>
+              <ion-label class="description" *ngIf="item.snippet.description !=''" color="secondary">
+                {{ item.snippet.description }}
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-button (click)="add()" expand="block" fill="solid" shape="round">
+              Add Video
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+
+    </ion-card>
+  </ng-container>
+
+
+  <ng-container *ngIf="showsearch && (response$ | async) as response">
+    <ion-card *ngFor="let item of response.data">
+      <ion-card-header>
+        <ion-card-title>{{ item.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col size="4">
+            <ion-img [src]="item.thumbnail" width="60px" height="45px"></ion-img>
+          </ion-col>
+          <ion-col size="8">
+            <ion-row>
+              <ion-col size="12">
+                <ion-chip color="primary" mode="ios" outline="true" *ngFor="let page of item.relaciones">
+                  <ion-label>{{ page.name }}</ion-label>
+                  <ion-badge color="primary" mode="ios">{{ page.priority }}</ion-badge>
+                </ion-chip>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+</ion-content>

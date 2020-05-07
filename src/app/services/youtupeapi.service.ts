@@ -35,4 +35,16 @@ export class YouTubeAPIService {
 			}
 		});
 	}
+
+	get(id: string) {
+		return this.http.get<YouTubeResponse>(youtubeAPI + 'videos', {
+			params: {
+				key: youtubeAPIKey,
+				part: 'snippet',
+				id,
+				type: 'video',
+				maxResults: '50'
+			}
+		});
+	}
 }

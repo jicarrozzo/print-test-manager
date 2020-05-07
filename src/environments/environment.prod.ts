@@ -3,8 +3,9 @@ export const environment = {
 	licencensingUrlTest: 'http://licws.sisorg.com.ar',
 	licencensingUrlProd: 'https://lic.sisorgcloud.com/rest',
 	ShowInterceptionLog: false,
-	Token: 'YOUR_TOKEN',
+	Token: 'AABHMAAABHABFZDADC72AE74E8412AABUFSVNHGT',
 	ImagePath: 'mis_imagenes',
 	YouTubeUrl: 'https://www.googleapis.com/youtube/v3/',
-	YouTubeAPIKey: 'YOUR_API_KEY'
+	YouTubeAPIKey: 'AIzaSyDpFDeWb_rSuOj-9F93Z08SDDaioP03TsM',
+	HelpdeskUrl: 'https://192.168.1.67/'
 };
